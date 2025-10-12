@@ -161,6 +161,75 @@ return {...prevState, place: "World-Wide Web"}
 
 Everything is wrapped in curly braces so that this new object is built correctly, and it is returned from the call to setGreeting.
 
+___________________________________________________________________________________________________
+**React Data Flow — Little Lemon Goals App**
+
+```
+               🟨 Parent Component
+               ┌────────────────────────────────┐
+               │            App.jsx             │
+               │--------------------------------│
+               │ State:                         │
+               │  const [allGoals, setAllGoals] │
+               │   = useState([]);              │
+               │                                │
+               │ Function:                      │
+               │  addGoal(goalEntry) {          │
+               │    setAllGoals([...prevGoals,  │
+               │                goalEntry]);    │
+               │  }                             │
+               │                                │
+               │ Renders:                       │
+               │  <GoalForm onAdd={addGoal}/>   │
+               │  <ListOfGoals allGoals={...}/> │
+               └────────────────────────────────┘
+                         ▲             │
+                         │ props.onAdd │ props.allGoals
+                         │             ▼
+      ┌───────────────────────────────┐       ┌───────────────────────────────┐
+      │        GoalForm.jsx           │       │      ListOfGoals.jsx          │
+      │-------------------------------│       │-------------------------------│
+      │ State:                        │       │ Props:                        │
+      │  formData = { goal: "", by:""}│       │  allGoals (array of objects)  │
+      │                               │       │                               │
+      │ User types → changeHandler()  │       │ Loops:                        │
+      │  setFormData({...formData,    │       │  allGoals.map(goalObj =>      │
+      │   [e.target.name]: e.target.value})   │   <li>{goalObj.goal} - {goalObj.by}</li>)│
+      │                               │       └───────────────────────────────┘
+      │ User clicks “Add Goal” → submitHandler()
+      │  → props.onAdd(formData)  🔁 sends data up
+      │  → setFormData({goal:"",by:""}) clears inputs
+      └───────────────────────────────┘
+```
+🔄 **Step-by-Step Data Flow**
+
+1. **User types** into input fields
+   ➜ `changeHandler` updates `formData` using `setFormData()`.
+
+2. **User clicks Submit**
+   ➜ `submitHandler` calls `props.onAdd(formData)` (passed down from `App`).
+
+3. **Data flows upward** to `App`
+   ➜ `App` receives `goalEntry` and calls `setAllGoals()` to update the array.
+
+4. **React re-renders**
+   ➜ The updated `allGoals` array is passed down as a prop to `ListOfGoals`.
+
+5. **ListOfGoals displays** the new goal in the list dynamically.
+
+---
+⚙️ Quick Example in Action
+
+| Action                 | What Happens                |
+| ---------------------- | --------------------------- |
+| Type in inputs         | `formData` updates live     |
+| Click “Add Goal”       | `addGoal()` runs in App     |
+| App updates `allGoals` | UI re-renders with new goal |
+| Form resets            | Inputs become empty again   |
+
+---
+
+
   
 
 
