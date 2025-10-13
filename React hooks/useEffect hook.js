@@ -1,8 +1,4 @@
-That’s a solid explanation — it’s from a React learning module about **useEffect** and **side effects**. Here’s a clear, concise **summary** of the entire passage so you can recall the key ideas quickly:
-
----
-
-### **Summary: Understanding useEffect and Side Effects in React**
+**Summary: Understanding useEffect and Side Effects in React**
 
 * **Side effects** are actions that occur outside a function’s scope (e.g., `console.log`, `fetch`, accessing browser APIs).
 * **Pure functions** always produce the same output for the same input and have no side effects.
@@ -15,15 +11,7 @@ That’s a solid explanation — it’s from a React learning module about **use
 * Example: Instead of logging inside the main function, wrap the console log inside a `useEffect` call.
 * This keeps React components clean and predictable while still allowing controlled interactions with external systems.
 
----
-
-Would you like me to give you a **simple example code** showing how the `ShoppingCart` component becomes pure when wrapped with `useEffect`?
-
-Perfect — that’s a great continuation of the `useEffect` concept. Let’s break it down clearly and then show **new real-time examples** (beyond the Little Lemon app).
-
----
-
-### **Summary of the Section**
+**Summary of the Section**
 
 * **Scenario:** The owner wants the app to show or hide a welcome message on button clicks and update the **browser tab title** accordingly.
 * **Concept introduced:** The tab update is a **side effect**, so it should be done inside `useEffect`.
@@ -67,10 +55,9 @@ export default LittleLemonApp;
 ```
 
 ---
+**New Real-Time Examples**
 
-### **New Real-Time Examples**
-
-#### **1. Updating Page Title When a User Logs In or Out**
+**1. Updating Page Title When a User Logs In or Out**
 
 ```jsx
 import { useEffect } from "react";
@@ -85,8 +72,8 @@ function Dashboard({ user }) {
 **Use case:** In real apps like Gmail or Slack, the browser tab often updates based on user login status.
 
 ---
-
-#### **2. Fetching Live Stock Prices**
+  
+**2. Fetching Live Stock Prices**
 
 ```jsx
 import { useState, useEffect } from "react";
@@ -108,7 +95,7 @@ function StockTracker() {
 
 ---
 
-#### **3. Tracking Window Resize**
+**3. Tracking Window Resize**
 
 ```jsx
 import { useState, useEffect } from "react";
@@ -245,6 +232,40 @@ fetch(`https://littlelemon/menu/${id}`)
 ```
 because `id` comes from the `props` object.
 ---
+__________________________________________________________________________________________________________________________________________
+Effects with Cleanup
+
+-> Some side effects may need to clean up resources or memory that is not required anymore, avoiding any memory leaks that could slow 
+down your applications.
+-> For example, you may want to set up a subscription to an external data source. In that scenario, it is vital to perform a cleanup 
+after the effect finishes its execution.
+-> If your effect returns a function, React will run it when it’s time to clean up resources and free unused memory.
+
+__________________________________________________________________________________________________________________________________________
+function LittleLemonChat(props) { 
+  const [status, chatStatus] = useState('offline'); 
+
+  useEffect(() => { 
+    LemonChat.subscribeToMessages(props.chatId, () => setStatus('online')) 
+
+    return () => { 
+      setStatus('offline'); 
+      LemonChat.unsubscribeFromMessages(props.chatId); 
+    }; 
+  }, []); 
+
+  // ... 
+} 
+__________________________________________________________________________________________________________________________________________
+-> Returning a function is optional and it’s the mechanism React provides in case you need to perform additional cleanup in your components.
+
+-> React will make sure to run the cleanup logic when it’s needed. The execution will always happen when the component unmounts. However, 
+in effects that run after every render and not just once, React will also clean up the effect from the previous render before running the 
+new effect next time.
+
+
+
+
 
 
 
