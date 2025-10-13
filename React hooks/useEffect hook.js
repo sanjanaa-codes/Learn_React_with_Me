@@ -263,6 +263,53 @@ ________________________________________________________________________________
 in effects that run after every render and not just once, React will also clean up the effect from the previous render before running the 
 new effect next time.
 
+# Refined Quiz (clean, professional)
+
+1. **Imagine you have to log a state variable to the console whenever the variable updates. What’s the best place to perform this operation in a React component?**
+   a. Before the return statement of the component
+   b. **useEffect hook**
+   c. Inside the JSX return
+   **Answer:** b — useEffect hook.
+   **Why:** Side effects (like logging) belong in useEffect so they run after renders and can be controlled with dependencies.
+
+2. **The useEffect hook accepts...**
+   a. two callback functions
+   b. **a callback function and an array**
+   c. a callback function and an object
+   **Answer:** b — a callback function and an array.
+   **Why:** The first argument is the effect callback; the second is the dependency array that controls when the effect runs.
+
+3. **What is a pure React component?**
+   a. **A component that doesn't have any side effects**
+   b. A component that has at least one side effect
+   **Answer:** a — A component without side effects.
+   **Why:** Pure components produce the same output for the same props/state and do not perform external actions.
+
+4. **What is the name of the second argument of the useEffect() call?**
+   a. **the dependency array**
+   b. the callback function
+   c. the destructured object
+   d. the dependencies object
+   **Answer:** a — the dependency array.
+   **Why:** It lists variables that, when changed, re-trigger the effect.
+
+5. **This code logs the toggle value but the effect isn't re-invoked when toggle changes. How should the dependencies array be updated?**
+
+```js
+React.useEffect(() => {
+  console.log('The value of the toggle variable is', toggle);
+}, []);
+```
+
+Options:
+a. The dependencies array should receive the toggle variable as its single member.
+b. The dependencies array should be removed.
+c. The dependencies array should be updated to: [{toggle}].
+d. The dependencies array should be replaced with: {toggle}.
+
+**Answer:** a — `[toggle]`.
+**Why:** Include `toggle` in the dependency array so the effect runs whenever `toggle` changes.
+
 
 
 
