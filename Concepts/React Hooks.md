@@ -30,7 +30,7 @@ Understanding React Hooks
   * Don’t rely on old class syntax; **invest time to learn hooks properly**.
   * Once mastered, hooks make your code **more logical and consistent**.
 
--> Why Hooks Were Introduced**
+-> Why Hooks Were Introduced
 
 Before hooks, developers used **class components** to manage state and lifecycle methods (`this.state`, `componentDidMount`, etc.).
 Problems with class components:
@@ -126,7 +126,7 @@ Say: “`useContext` allows components to share data easily without passing prop
 
 ---
 
- (d) useRef – Access DOM or Persist Values**
+ (d) useRef – Access DOM or Persist Values
 
  Purpose 
 
@@ -164,7 +164,7 @@ Explain: “`useRef` doesn’t trigger re-renders when updated — it’s perfec
 
 ---
 
-(e) useMemo – Optimize Performance**
+(e) useMemo – Optimize Performance
 
 **Purpose:** Memoizes (remembers) **expensive computations** so they’re not recalculated unnecessarily.
 
@@ -188,7 +188,7 @@ function ExpensiveCalculation({ num }) {
 
 ---
 
-(f) useCallback – Optimize Functions**
+(f) useCallback – Optimize Functions
 
 **Purpose:** Prevents functions from being recreated unnecessarily on every render.
 
@@ -211,7 +211,7 @@ function Counter() {
 
 ---
 
-(g) useReducer – Complex State Management**
+(g) useReducer – Complex State Management
 
 **Purpose:** Alternative to `useState` for managing complex or interrelated state logic (similar to Redux reducer).
 
@@ -246,14 +246,14 @@ function Counter() {
 
 ---
 
-4. Hook Rules (Always Follow These!)**
+4. Hook Rules (Always Follow These!)
 
 1. Only call hooks **at the top level** (not inside loops or conditionals).
 2. Only call hooks **inside React functional components or custom hooks**.
 
 ---
 
-5. Custom Hooks (Bonus for Interviews)**
+5. Custom Hooks (Bonus for Interviews)
 
 **Purpose:** Reuse logic across components by creating your own hook.
 
@@ -283,7 +283,7 @@ Say: “Custom hooks let me package reusable logic — like fetching data or han
 
 ---
 
-6. Summary Table (For Quick Revision)**
+6. Summary Table (For Quick Revision)
 
 | Hook          | Purpose                       | Example Use Case                |
 | ------------- | ----------------------------- | ------------------------------- |
